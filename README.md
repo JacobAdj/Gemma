@@ -104,4 +104,13 @@ with open('meergetallendata.json', 'a') as outfile:
         outfile.write(json.dumps(case) + '\n')
 ```
 
-        
+## Loading a pretrained model
+
+We create a model using the Keras implementation of GemmaCausalLM, an end-to-end Gemma model for causal language modeling. A causal language model predicts the next token based on previous tokens.
+
+Create the model using the from_preset method:     
+
+```python
+gemma_lm = keras_nlp.models.GemmaCausalLM.from_preset("gemma2_2b_en")
+gemma_lm.summary()
+```
