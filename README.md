@@ -124,4 +124,9 @@ To generate better responses, we fine-tune the model with Low Rank Adaptation (L
 
 The LoRA rank determines the dimensionality of the trainable matrices that are added to the original weights of the LLM. It controls the expressiveness and precision of the fine-tuning adjustments.
 
-A higher rank means more detailed changes are possible, but also means more trainable parameters. A lower rank means less computational overhead, but potentially less precise adaptation. We use a LoRA rank of 4.
+A higher rank means more detailed changes are possible, but also means more trainable parameters. A lower rank means less computational overhead, but potentially less precise adaptation. We use a LoRA rank of 4:
+
+```python
+gemma_lm.backbone.enable_lora(rank=4)
+gemma_lm.summary()
+```
