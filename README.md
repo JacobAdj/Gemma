@@ -114,3 +114,14 @@ Create the model using the from_preset method:
 gemma_lm = keras_nlp.models.GemmaCausalLM.from_preset("gemma2_2b_en")
 gemma_lm.summary()
 ```
+
+
+## Fine-tuning
+
+The pretrained model only produces some random-looking text from the Dutch numerals data.
+
+To generate better responses, we fine-tune the model with Low Rank Adaptation (LoRA) using 1000 examples of correct data in the form {"instruction": "negenhonderdvierentwintig" , "response": "924" }.
+
+The LoRA rank determines the dimensionality of the trainable matrices that are added to the original weights of the LLM. It controls the expressiveness and precision of the fine-tuning adjustments.
+
+A higher rank means more detailed changes are possible, but also means more trainable parameters. A lower rank means less computational overhead, but potentially less precise adaptation. We use a LoRA rank of 4.
