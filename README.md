@@ -130,20 +130,20 @@ A higher rank means more detailed changes are possible, but also means more trai
 gemma_lm.backbone.enable_lora(rank=4)
 gemma_lm.summary()
 
- # Limit the input sequence length to 27 
-    gemma_lm.preprocessor.sequence_length = 27
-    # Use AdamW (a common optimizer for transformer models).
-    optimizer = keras.optimizers.AdamW(
-        learning_rate=5e-5,
-        weight_decay=0.01,
-    )
-    # Exclude layernorm and bias terms from decay.
-    optimizer.exclude_from_weight_decay(var_names=["bias", "scale"])
-    
-    gemma_lm.compile(
-        loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-        optimizer=optimizer,
-        weighted_metrics=[keras.metrics.SparseCategoricalAccuracy()],
-    )
-    gemma_lm.fit(data, epochs=20, batch_size=1)
+# Limit the input sequence length to 27 
+gemma_lm.preprocessor.sequence_length = 27
+# Use AdamW (a common optimizer for transformer models).
+optimizer = keras.optimizers.AdamW(
+    learning_rate=5e-5,
+    weight_decay=0.01,
+)
+# Exclude layernorm and bias terms from decay.
+optimizer.exclude_from_weight_decay(var_names=["bias", "scale"])
+
+gemma_lm.compile(
+    loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    optimizer=optimizer,
+    weighted_metrics=[keras.metrics.SparseCategoricalAccuracy()],
+)
+gemma_lm.fit(data, epochs=20, batch_size=1)
 ```
