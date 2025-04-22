@@ -153,16 +153,37 @@ gemma_lm.fit(data, epochs=20, batch_size=1)
 
 After fine-tuning, responses follow the instruction provided in the prompt.
 
-Prompt with numeral for 737
+Prompts with numerals in some test data:
 
 ```python
 sampler = keras_nlp.samplers.TopKSampler(k=5, seed=2)
 gemma_lm.compile(sampler=sampler)
 
-prompt = template.format(
-    instruction="zevenhonderdzevenendertig?",
-    response="",
-)
-
-print(gemma_lmft.generate(prompt, max_length=100))
+for d in range(0 , len(testdata)):
+    print('*' , testdata[d] , '*')
+    
+    print('infer' , gemma_lmft.generate(testdata[d], max_length=100))
 ```
+
+gives reponses with the correct numbers:
+
+* Instruction:
+zeshonderdzeven
+
+Response:
+ *
+infer Instruction:
+zeshonderdzeven
+
+Response:
+607
+* Instruction:
+negenhonderdtwintig
+
+Response:
+ *
+infer Instruction:
+negenhonderdtwintig
+
+Response:
+920
